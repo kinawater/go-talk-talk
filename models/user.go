@@ -34,15 +34,17 @@ func GetUserById(id int) Users {
 	return user
 }
 
-//GetUserByName  通过用户名查用户
-func GetUserByName(name string) []Users {
-	var users []Users
+// 通过用户名取得用户
+func GetUserByName(name string) Users {
 	var user Users
 	global.MysqlDB.Where(" username = ?", name).First(&user)
-	if user != (Users{}) {
-		users = append(users, user)
-	} else {
-		global.MysqlDB.Where(" username like ?", "%"+name+"%").Find(&users)
-	}
+	return user
+}
+
+//GetUserByName  通过用户名查用户
+func GetUserListByName(name string) []Users {
+	var users []Users
+	global.MysqlDB.Where(" username like ?", "%"+name+"%").Find(&users)
+
 	return users
 }
