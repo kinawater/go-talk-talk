@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"go-talk-talk/config"
 	"go-talk-talk/global"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -25,16 +26,16 @@ func init() {
 
 	// 链接数据库
 	DBLinkConfigFormat := fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?charset=utf8mb4&parseTime=true&loc=Local",
-		global.MysqlDateBaseConfig.DbUser,
-		global.MysqlDateBaseConfig.DbPassword,
-		global.MysqlDateBaseConfig.DbHost,
-		global.MysqlDateBaseConfig.DbPort,
-		global.MysqlDateBaseConfig.DbDataName)
+		config.MysqlDateBaseConfig.DbUser,
+		config.MysqlDateBaseConfig.DbPassword,
+		config.MysqlDateBaseConfig.DbHost,
+		config.MysqlDateBaseConfig.DbPort,
+		config.MysqlDateBaseConfig.DbDataName)
 	db, err := gorm.Open(mysql.Open(DBLinkConfigFormat), &gorm.Config{
 		SkipDefaultTransaction: true, // 默认关闭事务
 		NamingStrategy: schema.NamingStrategy{
 			SingularTable: true,
-			TablePrefix:   global.MysqlDateBaseConfig.DbTablePrefix,
+			TablePrefix:   config.MysqlDateBaseConfig.DbTablePrefix,
 		},
 		//开启日志监控级别
 		Logger: DBLogger,

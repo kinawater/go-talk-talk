@@ -6,7 +6,7 @@ PAGE_SIZE = 10
 JWT_SECRET = "1@bb633644&&$EEB"
 
 [server]
-HTTP_PORT = 8088
+HTTP_PORT = 9527
 READ_TIMEOUT = 60
 WRITE_TIMEOUT = 60
 
@@ -23,3 +23,15 @@ TABLE_PREFIX = "talk"
 LOG_PATH = "runtime/logs/"
 LOG_SAVE_NAME = "log"
 LOG_FILE_EXT = "log"
+
+[email]
+FROM = "lspwuwuwu <lspwuwuwu@yandex.com>"
+SMTP_ADDR = "smtp.yandex.com:465"
+SMTP_USERNAME = "lspwuwuwu@yandex.com"
+SMTP_PASSWORD = "qepsrwofsrcezwxf"
+SMTP_HOST = "smtp.yandex.com"
+
+[redis]
+REDIS_HOST = "127.0.0.1"
+REDIS_PORT = "6379"
+REDIS_NETWORK = "tcp"
