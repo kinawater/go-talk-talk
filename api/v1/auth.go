@@ -206,6 +206,7 @@ func Login(c *gin.Context) {
 
 	if userInfo.Id > 0 {
 		// 判断密码是否正确
+		log.Println(userRegisterBody.Password)
 		err := bcrypt.CompareHashAndPassword([]byte(userInfo.Password), []byte(userRegisterBody.Password))
 		if err != nil {
 			// 密码错误

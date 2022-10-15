@@ -75,3 +75,10 @@ func GetUserListAllByTime(limitNum int, descFlag bool) []TalkUser {
 	global.MysqlDB.Order("UpdateAt " + descStr).Limit(limitNum).Find(&users)
 	return users
 }
+
+func GetRandomInfo() TalkUser {
+	var user TalkUser
+	global.MysqlDB.Order(" Rand() ").Take(&user)
+	return user
+
+}

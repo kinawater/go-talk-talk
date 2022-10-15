@@ -16,3 +16,14 @@ func GetUserList(c *gin.Context) {
 		"message": "验证码尚未过期，60秒后再试",
 	})
 }
+
+func GetRandomUser(c *gin.Context) {
+	errorCode := errorInfo.SUCCESS
+	userInfo := models.GetRandomInfo()
+	userInfo.Password = "123456"
+	c.JSON(http.StatusOK, gin.H{
+		"code":    errorCode,
+		"data":    userInfo,
+		"message": "验证码尚未过期，60秒后再试",
+	})
+}

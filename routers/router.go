@@ -5,6 +5,8 @@ import (
 	v1 "go-talk-talk/api/v1"
 	"go-talk-talk/config"
 	"go-talk-talk/middleware"
+	"go-talk-talk/pkg/websocketIO"
+	"log"
 )
 
 func InitRouter() *gin.Engine {
@@ -32,6 +34,19 @@ func InitRouter() *gin.Engine {
 	{
 		// 用户列表
 		apiV1.GET("/userList", v1.GetUserList)
+		// 随机测试用户
+		apiV1.POST("/getRandomUser", v1.GetRandomUser)
 	}
+	server := websocketIO.WsHandle()
+	go func() {
+		if err := server.Serve(); err != nil {
+			log.Println("socketio listen error: ", err)
+		}
+		defer server.Close()
+	}()
+
+	r.GET("/socket.io/*any", gin.WrapH(server))
+	r.POST("/socket.io/*any", gin.WrapH(server))
+
 	return r
 }
